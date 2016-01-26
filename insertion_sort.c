@@ -10,21 +10,37 @@
 
 int * insertionSort(int unsortedArray[])
 {
-  return NULL;
+  int arrayLength = 11;
+  int *begin = unsortedArray;
+  int *end = begin + arrayLength;
+
+  for(int *i = begin; i < end; i++){
+    int curNum = *i;
+    for(int *curPosition = i; curPosition > begin; curPosition--){
+      if(*(curPosition-1) > *curPosition){
+          // switch them
+          int tmp = *curPosition;
+          *curPosition = *(curPosition-1);
+          *(curPosition-1) = tmp;
+      }
+    }
+  }
+
+  return unsortedArray;
 }
 
 int main(int argc, char *argv[])
 {
   // gather the input
   // TODO: Make this a separate function. Gather it from a file or from user
-  int input[10] = {2,7,3,1,4,9,0,6,5,8};
+  int input[11] = {2,7,3,1,4,9,0,6,5,8, 10};
 
   // sorting algorithm
   int *output = insertionSort(input);
 
   // print the output
   // TODO: Shold probably make this a separate function too.
-  for(int i = 0; i < 10; i++){
+  for(int i = 0; i < 11; i++){
     printf("%d ", *(output+i));
   }
   printf("\n");
