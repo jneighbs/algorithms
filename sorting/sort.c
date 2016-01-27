@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "sort.h"
 
@@ -53,4 +54,93 @@ int * mySelectionSort(int unsortedArray[], int arrayLength)
     unsortedArray[minIndex] = tmp;
   }
   return unsortedArray;
+}
+
+/*******************************************************************************
+  Name: mergeSort!
+  Args: A pointer to an unsorted array of ints, and n, the number of elements
+  Return: A malloc'd pointer to a new sorted array
+*******************************************************************************/
+
+// wrapper for mergeSortRecursive
+int * myMergeSort(int *unsortedArray, int numElements);
+// the recursive mergeSort function
+int * mergeSortRecursive(int *arrayToSort, int numElements);
+// the merge function
+int * merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize);
+
+
+
+int * myMergeSort(int *unsortedArray, int numElements)
+{
+  // create new array in heap, check for errors
+  int *arrayToSort = (int*) malloc(numElements*sizeof(int));
+  if(arrayToSort == NULL){
+    fprintf(stderr, "ERROR: function myMergeSort failed to allocate new memory\n");
+    exit(1);
+  }
+  // copy input array onto our newly allocated array
+  memcpy(arrayToSort, unsortedArray, numElements * sizeof(int));
+
+  // return our new, sorted array
+  return mergeSortRecursive(arrayToSort, numElements);
+}
+
+int * mergeSortRecursive(int *arrayToSort, int numElements)
+{
+  /* Base case! If only 1 element, then it must be sorted! */
+  if(numElements <= 1) return arrayToSort;
+
+  /* Separate out left half of array and recursively sort it */
+  int *l_array = arrayToSort;
+  int l_arraySize = numElements/2;
+  l_array = mergeSortRecursive(l_array, l_arraySize);
+
+  /* Separate out right half of array and recursively sort it */
+  int *r_array = arrayToSort + l_arraySize;
+  int r_arraySize = numElements - l_arraySize;
+  r_array = mergeSortRecursive(r_array, r_arraySize);
+
+  /* return the merged versions */
+  return merge(l_array, l_arraySize, r_array, r_arraySize);
+}
+
+// merge the left and right arrays together, in sorted order
+int * merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize)
+{
+  int totalSize = l_arraySize + r_arraySize;
+  // malloc and error check
+  int *tmpArray = (int *) malloc(totalSize * sizeof(int));
+  if(tmpArray == NULL){
+    fprintf(stderr, "ERROR: fn merge failed to allocate new memory");
+    exit(1);
+  }
+
+  int i = 0;  //l_array index
+  int j = 0;  //r_array index
+  int k = 0;  //tmpArray index
+
+  // copy both halves over to tmpArray in sorted order
+  while(k<totalSize){
+    if(*(l_array+i) < *(r_array+j)){
+      *(tmpArray+k++) = *(l_array+i++);
+      // This array is empty. Flush the other array
+      if(i==l_arraySize){
+        while(j<r_arraySize) *(tmpArray+k++) = *(r_array+j++);
+        break;
+      }
+    } else {
+      *(tmpArray+k++) = *(r_array+j++);
+      // This array is empty. Flush the other array
+      if(j==r_arraySize){
+        while(i<l_arraySize) *(tmpArray+k++) = *(l_array+i++);
+        break;
+      }
+    }
+  }
+
+  // copy tmp array back over the array that was passed in
+  memcpy(l_array, tmpArray, totalSize*sizeof(int));
+  free(tmpArray);
+  return l_array;
 }

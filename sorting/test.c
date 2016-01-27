@@ -5,17 +5,27 @@
 int main(){
   int unsortedArray[] = INPUT;
   int numElements = sizeof(unsortedArray)/sizeof(unsortedArray[0]);
+
   // print unsorted array
+  printf("Unsorted: \t\t");
   for(int i = 0; i < numElements; i++){
     printf("%d ", unsortedArray[i]);
   }
   printf("\n");
 
   // int *sorted = myInsertionSort(unsortedArray, numElements);
-  int *sorted = mySelectionSort(unsortedArray, numElements);
+  // int *sorted = mySelectionSort(unsortedArray, numElements);
+  int *sorted3 = myMergeSort(unsortedArray, numElements);
 
+  printf("myMergeSort: \t\t");
   for(int i = 0; i < numElements; i++){
-    printf("%d ", *(sorted+i));
+    printf("%d ", *(sorted3+i));
+  }
+  printf("\n");
+
+  printf("Unsorted again: \t");
+  for(int i = 0; i < numElements; i++){
+    printf("%d ", unsortedArray[i]);
   }
   printf("\n");
 }
