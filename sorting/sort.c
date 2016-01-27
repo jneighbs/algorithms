@@ -8,7 +8,7 @@
 #include <string.h>
 #include "sort.h"
 
-//
+// insertion sort!
 int * myInsertionSort(int unsortedArray[], int arrayLength)
 {
   int *begin = unsortedArray;
@@ -26,6 +26,31 @@ int * myInsertionSort(int unsortedArray[], int arrayLength)
           *(curPosition-1) = tmp;
       }
     }
+  }
+  return unsortedArray;
+}
+
+// selection sort!
+int * mySelectionSort(int unsortedArray[], int arrayLength)
+{
+  int begin = 0;
+  int end = begin + arrayLength;
+
+  // iterate through unsorted array
+  for(; begin < end; begin++){
+    // search for the min element of array
+    int min = unsortedArray[begin];
+    int minIndex = begin;
+    for(int i = minIndex+1; i < end; i++){
+      if(unsortedArray[i] < min){
+        min = unsortedArray[i];
+        minIndex = i;
+      }
+    }
+    // swap min element with element at beginning
+    int tmp = unsortedArray[begin];
+    unsortedArray[begin] = min;
+    unsortedArray[minIndex] = tmp;
   }
   return unsortedArray;
 }
