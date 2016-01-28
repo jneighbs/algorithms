@@ -1,31 +1,37 @@
+/*
+ * Author: Jacob Neighbors
+ * Date: 1/27/16
+ * Desc: Testing out my sorting functions.
+ */
+
 #include <stdio.h>
 #include "sort.h"
-#define INPUT {99,7,1042,-93,4,5,6,12,0,54,6,88,42}
+#include "../utilities.h"
+#define INPUT {8,10,3,9,4,2,5,1,7,6,500,100,4,0,123,17,44,103,42,42,42}
 
 int main(){
   int unsortedArray[] = INPUT;
   int numElements = sizeof(unsortedArray)/sizeof(unsortedArray[0]);
 
-  // print unsorted array
-  printf("Unsorted: \t\t");
-  for(int i = 0; i < numElements; i++){
-    printf("%d ", unsortedArray[i]);
-  }
-  printf("\n");
+  /* unsorted array */
+  printf("Unsorted: \t");
+  printIntArray(unsortedArray, numElements);
 
-  // int *sorted = myInsertionSort(unsortedArray, numElements);
-  // int *sorted = mySelectionSort(unsortedArray, numElements);
+  /* insertion sort */
+  // int *sorted1 = myInsertionSort(unsortedArray, numElements);
+  // printf("myInsertionSort: \t\t");
+  // printIntArray(sorted1, numElements);
+
+  /* selection sort */
+  // int *sorted2 = mySelectionSort(unsortedArray, numElements);
+  // printf("mySelectionSort: \t\t");
+  // printIntArray(sorted2, numElements);
+
+  /* merge sort */
   int *sorted3 = myMergeSort(unsortedArray, numElements);
+  printf("myMergeSort: \t");
+  printIntArray(sorted3, numElements);
 
-  printf("myMergeSort: \t\t");
-  for(int i = 0; i < numElements; i++){
-    printf("%d ", *(sorted3+i));
-  }
-  printf("\n");
-
-  printf("Unsorted again: \t");
-  for(int i = 0; i < numElements; i++){
-    printf("%d ", unsortedArray[i]);
-  }
-  printf("\n");
+  // printf("Unsorted again: ");
+  // printIntArray(unsortedArray, numElements);
 }

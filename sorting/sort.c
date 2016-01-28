@@ -8,8 +8,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "sort.h"
+#include "../utilities.h"
 
 // insertion sort!
+// TODO: don't modify the array that is passed in
 int * myInsertionSort(int unsortedArray[], int arrayLength)
 {
   int *begin = unsortedArray;
@@ -32,6 +34,7 @@ int * myInsertionSort(int unsortedArray[], int arrayLength)
 }
 
 // selection sort!
+// TODO: don't modify the array that is passed in
 int * mySelectionSort(int unsortedArray[], int arrayLength)
 {
   int begin = 0;
@@ -74,11 +77,8 @@ int * merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize);
 int * myMergeSort(int *unsortedArray, int numElements)
 {
   // create new array in heap, check for errors
-  int *arrayToSort = (int*) malloc(numElements*sizeof(int));
-  if(arrayToSort == NULL){
-    fprintf(stderr, "ERROR: function myMergeSort failed to allocate new memory\n");
-    exit(1);
-  }
+  int *arrayToSort = (int*) myMalloc(numElements*sizeof(int));
+
   // copy input array onto our newly allocated array
   memcpy(arrayToSort, unsortedArray, numElements * sizeof(int));
 
@@ -110,11 +110,7 @@ int * merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize)
 {
   int totalSize = l_arraySize + r_arraySize;
   // malloc and error check
-  int *tmpArray = (int *) malloc(totalSize * sizeof(int));
-  if(tmpArray == NULL){
-    fprintf(stderr, "ERROR: fn merge failed to allocate new memory");
-    exit(1);
-  }
+  int *tmpArray = (int *) myMalloc(totalSize * sizeof(int));
 
   int i = 0;  //l_array index
   int j = 0;  //r_array index
