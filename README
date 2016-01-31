@@ -1,0 +1,26 @@
+./
+  Makefile
+  README
+  counting
+  include
+  sorting
+  utilities
+
+  ./counting:
+    sortAndCountInversions.c
+    testCount.c
+
+  ./include:
+    count.h
+    sort.h
+    utilities.h
+
+  ./sorting:
+    sort.c
+    sort.o
+    testSort.c
+    testSort.o
+
+  ./utilities:
+    utilities.c
+    utilities.o
