@@ -8,6 +8,7 @@
 #define SORT_H_
 
 int * myInsertionSort(int unsortedArray[], int arrayLength);
+// note: I return a malloc'd pointer, so you must free it when done
 int * myMergeSort(int unsortedArray[], int arrayLength);
 int * myBubbleSort(int unsortedArray[], int arrayLength); //TODO: implement
 int * mySelectionSort(int unsortedArray[], int arrayLength);

@@ -18,18 +18,18 @@ int main(){
   printIntArray(unsortedArray, numElements);
 
   /* insertion sort */
-  // int *sorted1 = myInsertionSort(unsortedArray, numElements);
-  // printf("myInsertionSort: \t\t");
-  // printIntArray(sorted1, numElements);
+  int *sorted1 = myInsertionSort(unsortedArray, numElements);
+  printf("Insertion Sort: ");
+  printIntArray(sorted1, numElements);
 
   /* selection sort */
-  // int *sorted2 = mySelectionSort(unsortedArray, numElements);
-  // printf("mySelectionSort: \t\t");
-  // printIntArray(sorted2, numElements);
+  int *sorted2 = mySelectionSort(unsortedArray, numElements);
+  printf("Selection Sort: ");
+  printIntArray(sorted2, numElements);
 
   /* merge sort */
   int *sorted3 = myMergeSort(unsortedArray, numElements);
-  printf("myMergeSort: \t");
+  printf("Merge Sort: \t");
   printIntArray(sorted3, numElements);
 
   // printf("Unsorted again: ");

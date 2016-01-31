@@ -24,7 +24,7 @@ void printIntArray(int arr[], int numElements)
 {
   printf("[");
   for(int i = 0; i < numElements; i++){
-    i+1 <numElements ? printf(" %d |", arr[i]) : printf(" %d ", arr[i]);
+    i+1 <numElements ? printf("%3d|", arr[i]) : printf("%3d", arr[i]);
 
   }
   printf("]\n");

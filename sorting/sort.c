@@ -13,18 +13,17 @@
 /*******************************************************************************
   Name: myInsertionSort
   Args: A pointer to an unsorted array of ints, num elements in array
-  Return:
+  Return: Sorted array! This is a malloc'd version. Have to free it when done.
 *******************************************************************************/
-// TODO: don't modify the array that is passed in
 int * myInsertionSort(int unsortedArray[], int arrayLength)
 {
-  int *begin = unsortedArray;
-  int *end = begin + arrayLength;
+  int *arrayToSort = (int*) myMalloc(arrayLength * sizeof(int));
+  memcpy(arrayToSort, unsortedArray, arrayLength * sizeof(int));
 
   // iterate through unsorted array
-  for(int *i = begin; i < end; i++){
+  for(int *i = arrayToSort; i < arrayToSort+arrayLength; i++){
     // iterate back through sorted section of array
-    for(int *curPosition = i; curPosition > begin; curPosition--){
+    for(int *curPosition = i; curPosition > arrayToSort; curPosition--){
       // if previous number greater than cur number
       if(*(curPosition-1) > *curPosition){
           // switch them
@@ -34,37 +33,38 @@ int * myInsertionSort(int unsortedArray[], int arrayLength)
       }
     }
   }
-  return unsortedArray;
+  return arrayToSort;
 }
 
 /*******************************************************************************
   Name: mySeleectionSort
   Args: A pointer to an unsorted array of ints, num elements in array
-  Return:
+  Return: Malloc'd sorted array
 *******************************************************************************/
 // TODO: don't modify the array that is passed in
 int * mySelectionSort(int unsortedArray[], int arrayLength)
 {
-  int begin = 0;
-  int end = begin + arrayLength;
+  int *arrayToSort = (int*) myMalloc(arrayLength * sizeof(int));
+  memcpy(arrayToSort, unsortedArray, arrayLength * sizeof(int));
 
   // iterate through unsorted array
-  for(; begin < end; begin++){
+  for(int i = 0; i < arrayLength; i++){
     // search for the min element of array
-    int min = unsortedArray[begin];
-    int minIndex = begin;
-    for(int i = minIndex+1; i < end; i++){
-      if(unsortedArray[i] < min){
-        min = unsortedArray[i];
-        minIndex = i;
+    int min = arrayToSort[i];
+    int minIndex = i;
+    for(int j = i+1; j < arrayLength; j++){
+      if(arrayToSort[j] < min){
+        min = arrayToSort[j];
+        minIndex = j;
       }
     }
     // swap min element with element at beginning
-    int tmp = unsortedArray[begin];
-    unsortedArray[begin] = min;
-    unsortedArray[minIndex] = tmp;
+    int tmp = arrayToSort[i];
+    arrayToSort[i] = min;
+    arrayToSort[minIndex] = tmp;
   }
-  return unsortedArray;
+
+  return arrayToSort;
 }
 
 /*******************************************************************************
@@ -73,78 +73,60 @@ int * mySelectionSort(int unsortedArray[], int arrayLength)
   Return: A malloc'd pointer to a new sorted array
 *******************************************************************************/
 
-// wrapper for mergeSortRecursive
-int * myMergeSort(int *unsortedArray, int numElements);
+// wrapper function - allocates some memory for the array so I dont overwrite the original
+int * myMergeSort(int arrayToSort[], int numElements);
 // the recursive mergeSort function
 int * mergeSortRecursive(int *arrayToSort, int numElements);
 // the merge function
 int * merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize);
 
-
-
-int * myMergeSort(int *unsortedArray, int numElements)
+int * myMergeSort(int arrayToSort[], int numElements)
 {
-  // create new array in heap, check for errors
-  int *arrayToSort = (int*) myMalloc(numElements*sizeof(int));
-
-  // copy input array onto our newly allocated array
-  memcpy(arrayToSort, unsortedArray, numElements * sizeof(int));
-
-  // return our new, sorted array
-  return mergeSortRecursive(arrayToSort, numElements);
+  int *sortedArray = (int *) myMalloc(numElements * sizeof(int));
+  memcpy(sortedArray, arrayToSort, numElements * sizeof(int));
+  return mergeSortRecursive(sortedArray, numElements);
 }
 
-int * mergeSortRecursive(int *arrayToSort, int numElements)
+// the recursive mergeSort function! split the arrays in half, then merge the sorted halves!
+int * mergeSortRecursive(int arrayToSort[], int numElements)
 {
   /* Base case! If only 1 element, then it must be sorted! */
   if(numElements <= 1) return arrayToSort;
 
-  /* Separate out left half of array and recursively sort it */
-  int *l_array = arrayToSort;
-  int l_arraySize = numElements/2;
-  l_array = mergeSortRecursive(l_array, l_arraySize);
-
-  /* Separate out right half of array and recursively sort it */
-  int *r_array = arrayToSort + l_arraySize;
-  int r_arraySize = numElements - l_arraySize;
-  r_array = mergeSortRecursive(r_array, r_arraySize);
+  /* Separate out left/right half of array and recursively sort them */
+  mergeSortRecursive(arrayToSort, numElements/2);
+  mergeSortRecursive(arrayToSort+numElements/2, numElements-numElements/2);
 
   /* return the merged versions */
-  return merge(l_array, l_arraySize, r_array, r_arraySize);
+  return merge(arrayToSort, numElements/2, arrayToSort+numElements/2, numElements-numElements/2);
 }
 
 // merge the left and right arrays together, in sorted order
-int * merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize)
+int * merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
 {
   int totalSize = l_arraySize + r_arraySize;
-  // malloc and error check
-  int *tmpArray = (int *) myMalloc(totalSize * sizeof(int));
+  int outputArray[totalSize];
 
-  int i = 0;  //l_array index
-  int j = 0;  //r_array index
-  int k = 0;  //tmpArray index
+  int l = 0;  //l_array index
+  int r = 0;  //r_array index
+  int k = 0;  //outputArray index
 
   // copy both halves over to tmpArray in sorted order
   while(k<totalSize){
-    if(*(l_array+i) < *(r_array+j)){
-      *(tmpArray+k++) = *(l_array+i++);
+    if(l_array[l] < r_array[r]){
+      outputArray[k++] = l_array[l++];
       // This array is empty. Flush the other array
-      if(i==l_arraySize){
-        while(j<r_arraySize) *(tmpArray+k++) = *(r_array+j++);
-        break;
-      }
+      if(l==l_arraySize)
+        while(r<r_arraySize) outputArray[k++] = r_array[r++];
     } else {
-      *(tmpArray+k++) = *(r_array+j++);
+      outputArray[k++] = r_array[r++];
       // This array is empty. Flush the other array
-      if(j==r_arraySize){
-        while(i<l_arraySize) *(tmpArray+k++) = *(l_array+i++);
-        break;
-      }
+      if(r==r_arraySize)
+        while(l<l_arraySize) outputArray[k++] = l_array[l++];
     }
   }
 
   // copy tmp array back over the array that was passed in
-  memcpy(l_array, tmpArray, totalSize*sizeof(int));
-  free(tmpArray);
+  memcpy(l_array, outputArray, totalSize*sizeof(int));
   return l_array;
 }

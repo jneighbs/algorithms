@@ -1,3 +1,10 @@
+Hey! The purpose of this project is to improve my C, improve my coding skills in general, and practice some algorithms at the same time!
+
+To run the code in a particular directory, type "make <name_of_directory>". So, if you wanted to run my sorting algorithms, type "make sorting". If you want to compile it all, just type "make"
+
+
+Directory Tree:
+
 .
 ├── Makefile
 ├── README

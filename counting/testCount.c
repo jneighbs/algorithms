@@ -6,10 +6,10 @@
 int main(int argc, char *argv[])
 {
   int input[] = INPUT;
-  printf("Input Array: ");
+  printf("Input Array:\t");
   printIntArray(input, sizeof(input)/sizeof(int));
-  printf("Num inversions: %d\n", sortAndCountInversions(input, sizeof(input)/sizeof(int)));
-  printf("Output Array: ");
+  printf("Num inversions:\t%d\n", sortAndCountInversions(input, sizeof(input)/sizeof(int)));
+  printf("Output Array:\t");
   printIntArray(input, sizeof(input)/sizeof(int));
   return 0;
 }
