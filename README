@@ -1,26 +1,17 @@
-./
-  Makefile
-  README
-  counting
-  include
-  sorting
-  utilities
+.
+├── Makefile
+├── README
+├── counting
+│   ├── sortAndCountInversions.c
+│   └── testCount.c
+├── include
+│   ├── count.h
+│   ├── sort.h
+│   └── utilities.h
+├── sorting
+│   ├── sort.c
+│   └── testSort.c
+└── utilities
+    └── utilities.c
 
-  ./counting:
-    sortAndCountInversions.c
-    testCount.c
-
-  ./include:
-    count.h
-    sort.h
-    utilities.h
-
-  ./sorting:
-    sort.c
-    sort.o
-    testSort.c
-    testSort.o
-
-  ./utilities:
-    utilities.c
-    utilities.o
+4 directories, 10 files
