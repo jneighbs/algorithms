@@ -10,7 +10,11 @@
 #include "sort.h"
 #include "../utilities.h"
 
-// insertion sort!
+/*******************************************************************************
+  Name: myInsertionSort
+  Args: A pointer to an unsorted array of ints, num elements in array
+  Return:
+*******************************************************************************/
 // TODO: don't modify the array that is passed in
 int * myInsertionSort(int unsortedArray[], int arrayLength)
 {
@@ -33,7 +37,11 @@ int * myInsertionSort(int unsortedArray[], int arrayLength)
   return unsortedArray;
 }
 
-// selection sort!
+/*******************************************************************************
+  Name: mySeleectionSort
+  Args: A pointer to an unsorted array of ints, num elements in array
+  Return:
+*******************************************************************************/
 // TODO: don't modify the array that is passed in
 int * mySelectionSort(int unsortedArray[], int arrayLength)
 {

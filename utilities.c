@@ -12,7 +12,7 @@ void* myMalloc(size_t size)
 {
   void *ptr = malloc(size);
   if(ptr == NULL){
-    fprintf(stderr, "ERROR: unable to allocate new space");
+    fprintf(stderr, "ERROR: (fn myMalloc in utilities.c) unable to allocate new space");
     exit(1);
   }
   return ptr;
@@ -24,7 +24,7 @@ void printIntArray(int arr[], int numElements)
 {
   printf("[");
   for(int i = 0; i < numElements; i++){
-    i+1 <numElements ? printf("%3d|", arr[i]) : printf("%3d", arr[i]);
+    i+1 <numElements ? printf(" %d |", arr[i]) : printf(" %d ", arr[i]);
 
   }
   printf("]\n");

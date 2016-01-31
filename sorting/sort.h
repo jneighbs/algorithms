@@ -1,7 +1,7 @@
 /*
  * Author: Jacob Neighbors
  * Date: 1/27/16
- * Desc: SHeader file for several sorting functions.
+ * Desc: Header file for several sorting functions.
  */
 
 #ifndef SORT_H_
