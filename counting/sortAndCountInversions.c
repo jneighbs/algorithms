@@ -8,7 +8,8 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "utilities.h"
+#include <utilities.h>
+#include <count.h>
 
 /*******************************************************************************
   Name: sortAndCountInversions
@@ -27,7 +28,7 @@ int sortAndCountInversions(int arr[], int n)
 {
   /* base case - arrays of size 1 can't be inverted */
   if(n <= 1) return 0;
-  
+
   int numInversions = 0;
   /* recursively sort and count the left half of the array */
   numInversions += sortAndCountInversions(arr, n/2);

@@ -1,7 +1,7 @@
 /*
  * Author: Jacob Neighbors
  * Date: 1/30/16
- * Desc: Header file for my sortAndCountInversion function
+ * Desc: Header file for my inversion counting algorithms
  */
 
 #ifndef MY_SORT_AND_COUNT_

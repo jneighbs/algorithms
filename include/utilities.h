@@ -1,7 +1,7 @@
 /*
  * Author: Jacob Neighbors
  * Date: 1/27/16
- * Desc: Header file for my utilities functions
+ * Desc: Header file for my utility functions
  */
 
 #ifndef MY_UTILITIES_H_

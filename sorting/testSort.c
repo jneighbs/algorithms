@@ -5,8 +5,8 @@
  */
 
 #include <stdio.h>
-#include "sort.h"
-#include "../utilities.h"
+#include <sort.h>
+#include <utilities.h>
 #define INPUT {8,10,3,9,4,2,5,1,7,6,500,100,4,0,123,17,44,103,42,42,42}
 
 int main(){

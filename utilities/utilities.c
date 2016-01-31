@@ -4,7 +4,7 @@
  * Desc: Decided to write up a few utility functions for my algorithms practice.
  */
 
-#include "utilities.h"
+#include <utilities.h>
 #include <stdio.h>
 
 // malloc that does some error checking automatically

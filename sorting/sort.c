@@ -7,8 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "sort.h"
-#include "../utilities.h"
+#include <sort.h>
+#include <utilities.h>
 
 /*******************************************************************************
   Name: myInsertionSort
