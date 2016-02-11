@@ -2,6 +2,16 @@ Hey! The purpose of this project is to improve my C, improve my coding skills in
 
 To run the code in a particular directory, type "make <name_of_directory>". So, if you wanted to run my sorting algorithms, type "make sorting", which will compile the testSort.c file (in the sorting folder) into an executable you can run from the root directory.
 
+Example commands:
+make sorting
+./testSort < input_files/input.txt
+
+Example Output:
+------
+Unsorted: 	      [  5|  4|  3|  2|  1]
+Insertion Sort:   [  1|  2|  3|  4|  5]
+Selection Sort:   [  1|  2|  3|  4|  5]
+Merge Sort: 	    [  1|  2|  3|  4|  5]
 
 Directory Tree:
 
