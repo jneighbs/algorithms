@@ -7,6 +7,6 @@
 #ifndef MY_SORT_AND_COUNT_
 #define MY_SORT_AND_COUNT_
 
-int sortAndCountInversions(int arr[], int n);
+uint64_t sortAndCountInversions(int arr[], int n);
 
 #endif

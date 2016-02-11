@@ -1,7 +1,7 @@
 /*
  * Author: Jacob Neighbors
  * Date: 1/26/16
- * Desc: Several sorrting functions! Mainly for fun.
+ * Desc: Several sorting functions! Mainly for fun.
  */
 
 #include <stdio.h>
@@ -37,7 +37,7 @@ int * myInsertionSort(int unsortedArray[], int arrayLength)
 }
 
 /*******************************************************************************
-  Name: mySeleectionSort
+  Name: mySelectionSort
   Args: A pointer to an unsorted array of ints, num elements in array
   Return: Malloc'd sorted array
 *******************************************************************************/
@@ -111,7 +111,7 @@ int * merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
   int r = 0;  //r_array index
   int k = 0;  //outputArray index
 
-  // copy both halves over to tmpArray in sorted order
+  // copy both halves over to outputArray in sorted order
   while(k<totalSize){
     if(l_array[l] < r_array[r]){
       outputArray[k++] = l_array[l++];
@@ -126,7 +126,7 @@ int * merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
     }
   }
 
-  // copy tmp array back over the array that was passed in
+  // copy outputArray back over the array that was passed in
   memcpy(l_array, outputArray, totalSize*sizeof(int));
   return l_array;
 }

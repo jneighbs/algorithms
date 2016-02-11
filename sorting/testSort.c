@@ -21,16 +21,19 @@ int main(){
   int *sorted1 = myInsertionSort(unsortedArray, numElements);
   printf("Insertion Sort: ");
   printIntArray(sorted1, numElements);
+  free(sorted1);
 
   /* selection sort */
   int *sorted2 = mySelectionSort(unsortedArray, numElements);
   printf("Selection Sort: ");
   printIntArray(sorted2, numElements);
+  free(sorted2);
 
   /* merge sort */
   int *sorted3 = myMergeSort(unsortedArray, numElements);
   printf("Merge Sort: \t");
   printIntArray(sorted3, numElements);
+  free(sorted3);
 
   // printf("Unsorted again: ");
   // printIntArray(unsortedArray, numElements);

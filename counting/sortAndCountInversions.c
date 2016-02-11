@@ -20,11 +20,11 @@
 *******************************************************************************/
 
 /* wrapper function */
-int sortAndCountInversions(int arr[], int n);
+uint64_t sortAndCountInversions(int arr[], int n);
 int mergeAndCount(int leftArray[], int leftElements, int rightArray[], int rightElements);
 
 
-int sortAndCountInversions(int arr[], int n)
+uint64_t sortAndCountInversions(int arr[], int n)
 {
   /* base case - arrays of size 1 can't be inverted */
   if(n <= 1) return 0;
