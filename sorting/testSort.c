@@ -7,10 +7,12 @@
 #include <stdio.h>
 #include <sort.h>
 #include <utilities.h>
-#define INPUT {8,10,3,9,4,2,5,1,7,6,500,100,4,0,123,17,44,103,42,42,42}
+// #define INPUT {8,10,3,9,4,2,5,1,7,6,500,100,4,0,123,17,44,103,42,42,42}
 
 int main(){
-  int unsortedArray[] = INPUT;
+  int size = countLines(stdin);
+  int unsortedArray[size];
+  getIntArray(unsortedArray, size, stdin);
   int numElements = sizeof(unsortedArray)/sizeof(unsortedArray[0]);
 
   /* unsorted array */
