@@ -20,16 +20,15 @@
 *******************************************************************************/
 
 /* wrapper function */
-uint64_t sortAndCountInversions(int arr[], int n);
-int mergeAndCount(int leftArray[], int leftElements, int rightArray[], int rightElements);
+unsigned long sortAndCountInversions(int arr[], int n);
+unsigned long mergeAndCount(int leftArray[], int leftElements, int rightArray[], int rightElements);
 
-
-uint64_t sortAndCountInversions(int arr[], int n)
+unsigned long sortAndCountInversions(int arr[], int n)
 {
   /* base case - arrays of size 1 can't be inverted */
   if(n <= 1) return 0;
 
-  int numInversions = 0;
+  unsigned long numInversions = 0;
   /* recursively sort and count the left half of the array */
   numInversions += sortAndCountInversions(arr, n/2);
   /* recursively sort and count the right half of the array */
@@ -40,12 +39,12 @@ uint64_t sortAndCountInversions(int arr[], int n)
 }
 
 // note - this only works if the 2 arrays are contiguous (ie connected to each other)
-int mergeAndCount(int leftArray[], int leftElements, int rightArray[], int rightElements)
+unsigned long mergeAndCount(int leftArray[], int leftElements, int rightArray[], int rightElements)
 {
   int tmpOutputArr[leftElements + rightElements];//placeholder for sorted output
   int l = 0; // index into left array
   int r = 0; // index into right array
-  int numInversions = 0;
+  unsigned long numInversions = 0;
   // sort, merge, and count!
   for(int i = 0; i < leftElements + rightElements;){
     if(leftArray[l] <= rightArray[r]){

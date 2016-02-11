@@ -18,11 +18,11 @@ int main(int argc, char *argv[])
   int input[count];
   getIntArray(input, count, stdin);
 
-  // printf("Input Array:\t");
-  // printIntArray(input, sizeof(input)/sizeof(int));
-  printf("Num inversions:\t%d\n", sortAndCountInversions(input, sizeof(input)/sizeof(int)));
-  // printf("Output Array:\t");
-  // printIntArray(input, sizeof(input)/sizeof(int));
-  // TODO: print output aray to a file
+  printf("Input Array:\t");
+  printIntArray(input, sizeof(input)/sizeof(int));
+  unsigned long numInversions = sortAndCountInversions(input, sizeof(input)/sizeof(int));
+  printf("Output Array:\t");
+  printIntArray(input, sizeof(input)/sizeof(int));
+  printf("Num inversions:\t%lu\n\n", numInversions);
   return 0;
 }

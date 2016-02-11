@@ -10,6 +10,7 @@
 #include <sort.h>
 #include <utilities.h>
 
+
 /*******************************************************************************
   Name: myInsertionSort
   Args: A pointer to an unsorted array of ints, num elements in array

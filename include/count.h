@@ -6,7 +6,8 @@
 
 #ifndef MY_SORT_AND_COUNT_
 #define MY_SORT_AND_COUNT_
+#include <stdlib.h>
 
-uint64_t sortAndCountInversions(int arr[], int n);
+unsigned long sortAndCountInversions(int arr[], int n);
 
 #endif

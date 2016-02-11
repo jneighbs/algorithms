@@ -16,7 +16,7 @@ int main(){
   int numElements = sizeof(unsortedArray)/sizeof(unsortedArray[0]);
 
   /* unsorted array */
-  printf("Unsorted: \t");
+  printf("Unsorted: \t\t\t");
   printIntArray(unsortedArray, numElements);
 
   /* insertion sort */
@@ -25,7 +25,7 @@ int main(){
   printIntArray(sorted1, numElements);
   free(sorted1);
 
-  /* selection sort */
+  // /* selection sort */
   int *sorted2 = mySelectionSort(unsortedArray, numElements);
   printf("Selection Sort: ");
   printIntArray(sorted2, numElements);
@@ -33,10 +33,9 @@ int main(){
 
   /* merge sort */
   int *sorted3 = myMergeSort(unsortedArray, numElements);
-  printf("Merge Sort: \t");
+  printf("Merge Sort: \t\t");
   printIntArray(sorted3, numElements);
   free(sorted3);
 
-  // printf("Unsorted again: ");
-  // printIntArray(unsortedArray, numElements);
+  printf("\n");
 }
