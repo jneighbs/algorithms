@@ -26,9 +26,11 @@ Directory Tree:
 │   ├── sort.h
 │   └── utilities.h
 ├── input_files
-│   ├── array.txt
-│   └── input.txt
+│   ├── input.txt
+│   └── large.txt
 ├── output_files
+│   ├── count.txt
+│   └── sorted.txt
 ├── sorting
 │   ├── sort.c
 │   └── testSort.c
@@ -36,4 +38,4 @@ Directory Tree:
     ├── testUtilities.c
     └── utilities.c
 
-6 directories, 13 files
+6 directories, 15 files
