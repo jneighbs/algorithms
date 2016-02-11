@@ -8,10 +8,10 @@ make sorting
 
 Example Output:
 ------
-Unsorted: 	      [  5|  4|  3|  2|  1]
-Insertion Sort:   [  1|  2|  3|  4|  5]
-Selection Sort:   [  1|  2|  3|  4|  5]
-Merge Sort: 	    [  1|  2|  3|  4|  5]
+Unsorted:       [  5|  4|  3|  2|  1]
+Insertion Sort: [  1|  2|  3|  4|  5]
+Selection Sort: [  1|  2|  3|  4|  5]
+Merge Sort:     [  1|  2|  3|  4|  5]
 
 Directory Tree:
 
