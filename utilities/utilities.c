@@ -7,6 +7,7 @@
 #include <utilities.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // malloc that does some error checking automatically
 void* myMalloc(size_t size)
@@ -19,16 +20,30 @@ void* myMalloc(size_t size)
   return ptr;
 }
 
-// prints an array of integers in a nice format
+// prints an array of integers in a nice format to given file
 // TODO: optional label argument, prettier format
-void printIntArray(int arr[], int numElements)
+void fprintIntArray(FILE *fp, int arr[], int numElements)
 {
-  printf("[");
+  fprintf(fp, "[");
   for(int i = 0; i < numElements; i++){
-    i+1 <numElements ? printf("%6d|", arr[i]) : printf("%6d", arr[i]);
+    i+1 <numElements ? fprintf(fp, "%6d|", arr[i]) : fprintf(fp, "%6d", arr[i]);
 
   }
-  printf("]\n");
+  fprintf(fp, "]\n");
+}
+
+// prints an array of integers in a nice format
+void printIntArray(int arr[], int numElements)
+{
+  fprintIntArray(stdin, arr, numElements);
+}
+
+// prints the time and date out to the given file
+void timeStamp(FILE *fp)
+{
+  time_t curTime;
+  time(&curTime);
+  fprintf(fp, "Timestamp: %s", ctime(&curTime));
 }
 
 // gets next line of file

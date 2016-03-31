@@ -15,6 +15,12 @@ void* myMalloc(size_t size);
 // prints an array of integers in a nice format
 void printIntArray(int arr[], int numElements);
 
+// prints an array of integers in a nice format to the given file
+void fprintIntArray(FILE *fp, int arr[], int numElements);
+
+// prints the time and date out to the given file
+void timeStamp(FILE *fp);
+
 // gets next line of file from stdin
 int getLine(char line[], int lineLength, FILE *fp);
 

@@ -42,7 +42,6 @@ int * myInsertionSort(int unsortedArray[], int arrayLength)
   Args: A pointer to an unsorted array of ints, num elements in array
   Return: Malloc'd sorted array
 *******************************************************************************/
-// TODO: don't modify the array that is passed in
 int * mySelectionSort(int unsortedArray[], int arrayLength)
 {
   int *arrayToSort = (int*) myMalloc(arrayLength * sizeof(int));
@@ -69,7 +68,7 @@ int * mySelectionSort(int unsortedArray[], int arrayLength)
 }
 
 /*******************************************************************************
-  Name: mergeSort!
+  Name: myMergeSort
   Args: A pointer to an unsorted array of ints, and n, the number of elements
   Return: A malloc'd pointer to a new sorted array
 *******************************************************************************/
@@ -130,4 +129,32 @@ int * merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
   // copy outputArray back over the array that was passed in
   memcpy(l_array, outputArray, totalSize*sizeof(int));
   return l_array;
+}
+
+/*******************************************************************************
+  Name: myQuickSort
+  Args: A pointer to an unsorted array of ints, and n, the number of elements
+*******************************************************************************/
+
+int partition(int unsortedArray[], int beginIndex, int endIndex)
+{
+  return 0;
+}
+
+void quickSortRecursive(int unsortedArray[], int beginIndex, int endIndex)
+{
+  if(endIndex-beginIndex > 1){
+
+    // (randomly) select a partition, and then partition the array
+    int partitionIndex = partition(unsortedArray, beginIndex, endIndex);
+
+    // recursively sort elements to the left/right of the partition
+    quickSortRecursive(unsortedArray, beginIndex, partitionIndex-1);
+    quickSortRecursive(unsortedArray, partitionIndex+1, endIndex);
+  }
+}
+
+void myQuickSort(int unsortedArray[], int arrayLength)
+{
+  quickSortRecursive(unsortedArray, 0, arrayLength-1);
 }

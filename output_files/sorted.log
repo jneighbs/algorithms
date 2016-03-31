@@ -1,0 +1,12 @@
+Timestamp: Sat Feb 13 17:00:12 2016
+Unsorted: 			[    10|     9|     8|     7|     6|     5|     4|     3|     2|     1]
+Insertion Sort: [     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+Selection Sort: [     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+Merge Sort: 		[     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+
+Timestamp: Sat Feb 13 17:01:02 2016
+Unsorted: 			[    10|     9|     8|     7|     6|     5|     4|     3|     2|     1]
+Insertion Sort: [     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+Selection Sort: [     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+Merge Sort: 		[     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+
