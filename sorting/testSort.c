@@ -17,9 +17,7 @@
 void sortAndPrint(int unsortedArray[], int numElements,
    void (*fnptr)(int arr[], int n), char *label, FILE *outputFile);
 
-// TODO: clean up output a little bit
-// TODO: sanity check the inputs
-
+// TODO: sanity check the inputs?
 int main(int argc, char * argv[])
 {
   // read arguments - NO ERROR CHECKING!
