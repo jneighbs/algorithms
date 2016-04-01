@@ -54,3 +54,6 @@ Directory Tree:
     └── utilities.c
 
 6 directories, 13 files
+
+Optimization Options:
+  Uncomment the "-Ofast" option in the Makefile (by the CFLAGS variable) to optimize at the highest setting.
