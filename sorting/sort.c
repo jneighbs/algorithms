@@ -12,19 +12,15 @@
 
 
 /*******************************************************************************
-  Name: myInsertionSort
-  Args: A pointer to an unsorted array of ints, num elements in array
-  Return: Sorted array! This is a malloc'd version. Have to free it when done.
+  Name: insertionSort
+  Args: unsorted array of ints, num elements in array
 *******************************************************************************/
-int * myInsertionSort(int unsortedArray[], int arrayLength)
+void insertionSort(int unsortedArray[], int arrayLength)
 {
-  int *arrayToSort = (int*) myMalloc(arrayLength * sizeof(int));
-  memcpy(arrayToSort, unsortedArray, arrayLength * sizeof(int));
-
   // iterate through unsorted array
-  for(int *i = arrayToSort; i < arrayToSort+arrayLength; i++){
+  for(int *i = unsortedArray; i < unsortedArray+arrayLength; i++){
     // iterate back through sorted section of array
-    for(int *curPosition = i; curPosition > arrayToSort; curPosition--){
+    for(int *curPosition = i; curPosition > unsortedArray; curPosition--){
       // if previous number greater than cur number
       if(*(curPosition-1) > *curPosition){
           // switch them
@@ -34,76 +30,65 @@ int * myInsertionSort(int unsortedArray[], int arrayLength)
       }
     }
   }
-  return arrayToSort;
 }
 
-/*******************************************************************************
-  Name: mySelectionSort
-  Args: A pointer to an unsorted array of ints, num elements in array
-  Return: Malloc'd sorted array
-*******************************************************************************/
-int * mySelectionSort(int unsortedArray[], int arrayLength)
-{
-  int *arrayToSort = (int*) myMalloc(arrayLength * sizeof(int));
-  memcpy(arrayToSort, unsortedArray, arrayLength * sizeof(int));
 
+/*******************************************************************************
+  Name: selectionSort
+  Args: an unsorted array of ints, num elements in array
+*******************************************************************************/
+void selectionSort(int unsortedArray[], int arrayLength)
+{
   // iterate through unsorted array
   for(int i = 0; i < arrayLength; i++){
     // search for the min element of array
-    int min = arrayToSort[i];
+    int min = unsortedArray[i];
     int minIndex = i;
     for(int j = i+1; j < arrayLength; j++){
-      if(arrayToSort[j] < min){
-        min = arrayToSort[j];
+      if(unsortedArray[j] < min){
+        min = unsortedArray[j];
         minIndex = j;
       }
     }
     // swap min element with element at beginning
-    int tmp = arrayToSort[i];
-    arrayToSort[i] = min;
-    arrayToSort[minIndex] = tmp;
+    int tmp = unsortedArray[i];
+    unsortedArray[i] = min;
+    unsortedArray[minIndex] = tmp;
   }
-
-  return arrayToSort;
 }
+
 
 /*******************************************************************************
-  Name: myMergeSort
-  Args: A pointer to an unsorted array of ints, and n, the number of elements
-  Return: A malloc'd pointer to a new sorted array
+  Name: mergeSort
+  Args: an unsorted array of ints, and the number of elements in it
 *******************************************************************************/
 
-// wrapper function - allocates some memory for the array so I dont overwrite the original
-int * myMergeSort(int arrayToSort[], int numElements);
 // the recursive mergeSort function
-int * mergeSortRecursive(int *arrayToSort, int numElements);
+void mergeSort(int arrayToSort[], int numElements);
 // the merge function
-int * merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize);
+void merge(int *l_array, int l_arraySize, int *r_array, int r_arraySize);
 
-int * myMergeSort(int arrayToSort[], int numElements)
+
+void mergeSort(int arrayToSort[], int numElements)
 {
-  int *sortedArray = (int *) myMalloc(numElements * sizeof(int));
-  memcpy(sortedArray, arrayToSort, numElements * sizeof(int));
-  return mergeSortRecursive(sortedArray, numElements);
+  /* Base case! Only sort arrays with more than 1 element! */
+  if(numElements > 1){
+
+    /* Separate out left/right half of array, and recursively sort them */
+    mergeSort(arrayToSort, numElements/2);
+    mergeSort(arrayToSort+numElements/2, numElements-numElements/2);
+
+    /* merge the 2 sorted halves */
+    merge(arrayToSort, numElements/2, arrayToSort+numElements/2,
+       numElements-numElements/2);
+  }
 }
 
-// the recursive mergeSort function! split the arrays in half, then merge the sorted halves!
-int * mergeSortRecursive(int arrayToSort[], int numElements)
-{
-  /* Base case! If only 1 element, then it must be sorted! */
-  if(numElements <= 1) return arrayToSort;
-
-  /* Separate out left/right half of array and recursively sort them */
-  mergeSortRecursive(arrayToSort, numElements/2);
-  mergeSortRecursive(arrayToSort+numElements/2, numElements-numElements/2);
-
-  /* return the merged versions */
-  return merge(arrayToSort, numElements/2, arrayToSort+numElements/2, numElements-numElements/2);
-}
 
 // merge the left and right arrays together, in sorted order
-int * merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
+void merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
 {
+  // create tmp stack storage to hold the merged array
   int totalSize = l_arraySize + r_arraySize;
   int outputArray[totalSize];
 
@@ -128,33 +113,57 @@ int * merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
 
   // copy outputArray back over the array that was passed in
   memcpy(l_array, outputArray, totalSize*sizeof(int));
-  return l_array;
 }
+
 
 /*******************************************************************************
-  Name: myQuickSort
-  Args: A pointer to an unsorted array of ints, and n, the number of elements
+  Name: quickSort
+  Args: an unsorted array of ints, and the number of elements in the array
 *******************************************************************************/
 
-int partition(int unsortedArray[], int beginIndex, int endIndex)
+// wrapper function to conform arguments to other sorting function args
+void quickSort(int unsortedArray[], int arrayLength);
+// the actual quickSort sorting function
+void quickSortRecursive(int unsortedArray[], int beginIndex, int endIndex);
+// partitioning fn
+int partition(int unsortedArray[], int beginIndex, int endIndex);
+
+// wrapper function to conform arguments to other sorting function args
+void quickSort(int unsortedArray[], int arrayLength)
 {
-  return 0;
+  quickSortRecursive(unsortedArray, 0, arrayLength-1);
 }
 
+// the actual quickSort sorting function
 void quickSortRecursive(int unsortedArray[], int beginIndex, int endIndex)
 {
-  if(endIndex-beginIndex > 1){
-
+  if(endIndex - beginIndex > 1){
     // (randomly) select a partition, and then partition the array
     int partitionIndex = partition(unsortedArray, beginIndex, endIndex);
-
     // recursively sort elements to the left/right of the partition
     quickSortRecursive(unsortedArray, beginIndex, partitionIndex-1);
     quickSortRecursive(unsortedArray, partitionIndex+1, endIndex);
   }
 }
 
-void myQuickSort(int unsortedArray[], int arrayLength)
+// grabs partition, moves numbers smaller to the left of it, larger to the right
+int partition(int unsortedArray[], int beginIndex, int endIndex)
 {
-  quickSortRecursive(unsortedArray, 0, arrayLength-1);
+  // TODO: select random number between beginIndex and endIndex to find partition
+  int partition = unsortedArray[endIndex];
+
+  // loop through array, values smaller than partition on left, larger on right
+  int i = beginIndex-1;
+  for(int j=beginIndex; j<endIndex; j++){
+    if(unsortedArray[j] < partition){
+      int tmp = unsortedArray[++i];
+      unsortedArray[i] = unsortedArray[j];
+      unsortedArray[j] = tmp;
+    }
+  }
+
+  unsortedArray[endIndex] = unsortedArray[i+1];
+  unsortedArray[i+1] = partition;
+
+  return i+1;
 }
