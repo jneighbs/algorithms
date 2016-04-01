@@ -3,15 +3,32 @@ Hey! The purpose of this project is to improve my C, improve my coding skills in
 To run the code in a particular directory, type "make <name_of_directory>". So, if you wanted to run my sorting algorithms, type "make sorting", which will compile the testSort.c file (in the sorting folder) into an executable you can run from the root directory.
 
 Example commands:
-make sorting
-./testSort < input_files/input.txt
+  make sorting
+  ./testSort input_files/input.txt stdout
 
 Example Output:
-------
-Unsorted:       [  5|  4|  3|  2|  1]
-Insertion Sort: [  1|  2|  3|  4|  5]
-Selection Sort: [  1|  2|  3|  4|  5]
-Merge Sort:     [  1|  2|  3|  4|  5]
+
+  Timestamp: Fri Apr  1 15:25:13 2016
+  ------------
+  Unsorted:       	[    10|     9|     8|     7|     6|     5|     4|     3|     2|     1]
+
+  Selection Sort: 	[     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+  CPU ticks: 2
+  Time taken: 0 seconds 0 milliseconds
+
+  Insertion Sort: 	[     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+  CPU ticks: 0
+  Time taken: 0 seconds 0 milliseconds
+
+  Merge Sort:     	[     1|     2|     3|     4|     5|     6|     7|     8|     9|    10]
+  CPU ticks: 3
+  Time taken: 0 seconds 0 milliseconds
+
+  Quick Sort:     	[     1|     2|     3|     4|     6|     5|     7|     8|     9|    10]
+  CPU ticks: 2
+  Time taken: 0 seconds 0 milliseconds
+
+  ------------
 
 Directory Tree:
 
@@ -29,8 +46,6 @@ Directory Tree:
 │   ├── input.txt
 │   └── large.txt
 ├── output_files
-│   ├── count.txt
-│   └── sorted.txt
 ├── sorting
 │   ├── sort.c
 │   └── testSort.c
@@ -38,4 +53,4 @@ Directory Tree:
     ├── testUtilities.c
     └── utilities.c
 
-6 directories, 15 files
+6 directories, 13 files
