@@ -10,3 +10,6 @@ sorting: ./sorting/testSort.o ./sorting/sort.o ./utilities/utilities.o
 
 counting: ./counting/testCount.o ./counting/sortAndCountInversions.o ./utilities/utilities.o
 	$(CC) -o ./testCount ./counting/testCount.o ./counting/sortAndCountInversions.o ./utilities/utilities.o $(CFLAGS)
+
+selecting: ./selecting/testSelect.o ./selecting/select.o ./utilities/utilities.o
+	$(CC) -o ./testSelect ./selecting/testSelect.o ./selecting/select.o ./utilities/utilities.o $(CFLAGS)
