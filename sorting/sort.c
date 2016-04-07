@@ -89,9 +89,9 @@ void mergeSort(int arrayToSort[], int numElements)
 // merge the left and right arrays together, in sorted order
 void merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
 {
-  // create tmp stack storage to hold the merged array
+  // create tmp heap storage to hold the merged array
   int totalSize = l_arraySize + r_arraySize;
-  int outputArray[totalSize];
+  int *outputArray = (int *)malloc(totalSize * sizeof(int*));
 
   int l = 0;  //l_array index
   int r = 0;  //r_array index
@@ -114,6 +114,7 @@ void merge(int l_array[], int l_arraySize, int r_array[], int r_arraySize)
 
   // copy outputArray back over the array that was passed in
   memcpy(l_array, outputArray, totalSize*sizeof(int));
+  free(outputArray);
 }
 
 
