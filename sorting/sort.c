@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <sort.h>
 #include <utilities.h>
 
@@ -137,7 +138,7 @@ void quickSort(int unsortedArray[], int arrayLength)
 // the actual quickSort sorting function
 void quickSortRecursive(int unsortedArray[], int beginIndex, int endIndex)
 {
-  if(endIndex - beginIndex > 1){
+  if(endIndex - beginIndex >= 1){
     // (randomly) select a partition, and then partition the array
     int partitionIndex = partition(unsortedArray, beginIndex, endIndex);
     // recursively sort elements to the left/right of the partition
@@ -149,8 +150,18 @@ void quickSortRecursive(int unsortedArray[], int beginIndex, int endIndex)
 // grabs partition, moves numbers smaller to the left of it, larger to the right
 int partition(int unsortedArray[], int beginIndex, int endIndex)
 {
-  // TODO: select random number between beginIndex and endIndex to find partition
-  int partition = unsortedArray[endIndex];
+  // select random pivot
+  time_t t;
+  srand((unsigned) &t);
+  int range = endIndex-beginIndex+1;
+  int partitionIndex = beginIndex+rand()%range;
+  int partition = unsortedArray[partitionIndex];
+
+  // swap pivot and last element
+  int tmp = unsortedArray[endIndex];
+  unsortedArray[endIndex] = unsortedArray[partitionIndex];
+  unsortedArray[partitionIndex] = tmp;
+
 
   // loop through array, values smaller than partition on left, larger on right
   int i = beginIndex-1;
@@ -162,8 +173,9 @@ int partition(int unsortedArray[], int beginIndex, int endIndex)
     }
   }
 
-  unsortedArray[endIndex] = unsortedArray[i+1];
-  unsortedArray[i+1] = partition;
+  partitionIndex = i+1;
+  unsortedArray[endIndex] = unsortedArray[partitionIndex];
+  unsortedArray[partitionIndex] = partition;
 
-  return i+1;
+  return partitionIndex;
 }

@@ -69,14 +69,15 @@ int main(int argc, char * argv[])
   fprintf(outputFile, "\n");
 
   // sort em! pass in the sorting function and the label used for printing
-  sortAndPrint(unsortedArray, numElements, selectionSort, "Selection Sort: \t",
-   outputFile);
-  sortAndPrint(unsortedArray, numElements, insertionSort, "Insertion Sort: \t",
-   outputFile);
-  sortAndPrint(unsortedArray, numElements, mergeSort, "Merge Sort:     \t",
-   outputFile);
   sortAndPrint(unsortedArray, numElements, quickSort, "Quick Sort:     \t",
    outputFile);
+  sortAndPrint(unsortedArray, numElements, mergeSort, "Merge Sort:     \t",
+    outputFile);
+  sortAndPrint(unsortedArray, numElements, insertionSort, "Insertion Sort: \t",
+     outputFile);
+  sortAndPrint(unsortedArray, numElements, selectionSort, "Selection Sort: \t",
+   outputFile);
+
 
   fprintf(outputFile, "------------\n");
   fclose(outputFile);
