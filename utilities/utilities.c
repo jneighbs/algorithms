@@ -35,7 +35,7 @@ void fprintIntArray(FILE *fp, int arr[], int numElements)
 // prints an array of integers in a nice format
 void printIntArray(int arr[], int numElements)
 {
-  fprintIntArray(stdin, arr, numElements);
+  fprintIntArray(stdout, arr, numElements);
 }
 
 // prints the time and date out to the given file
@@ -76,7 +76,7 @@ int countLines(FILE *fp)
 // of the file is a single integer to be input into the array
 int getIntArray(int intArray[], int length, FILE *fp)
 {
-  int maxNumDigits = 12;
+  int maxNumDigits = 15;
   char line[maxNumDigits+1];
   int i = 0;
   while(getLine(line, maxNumDigits+1, fp) > 0){

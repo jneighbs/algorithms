@@ -21,10 +21,10 @@ void fprintIntArray(FILE *fp, int arr[], int numElements);
 // prints the time and date out to the given file
 void timeStamp(FILE *fp);
 
-// gets next line of file from stdin
+// gets next line of file from given file
 int getLine(char line[], int lineLength, FILE *fp);
 
-// counts the number of lines in the file stdin
+// counts the number of lines in the given file
 int countLines(FILE *fp);
 
 // convert file of ints into int[], returns array size
