@@ -16,7 +16,7 @@ int readInput(int argc, char *argv[], int *i, FILE **inputFile, FILE **outputFil
 int main(int argc, char *argv[])
 {
   // read in args, check valid input, print out usage/error messages
-  int i;
+  int i;  //ith order statistic
   FILE *inputFile = stdin;
   FILE *outputFile = stdout;
   if(readInput(argc, argv, &i, &inputFile, &outputFile)==-1)  exit(1);
