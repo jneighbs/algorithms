@@ -27,6 +27,9 @@ int getLine(char line[], int lineLength, FILE *fp);
 // counts the number of lines in the given file
 int countLines(FILE *fp);
 
+// coutns the number of words in a token, delim by " \t\n\r"
+int countNumWords(FILE *fp);
+
 // convert file of ints into int[], returns array size
 int getIntArray(int intArray[], int length, FILE *fp);
 

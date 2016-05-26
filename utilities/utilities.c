@@ -72,6 +72,13 @@ int countLines(FILE *fp)
   return count;
 }
 
+int countNumWords(FILE *fp)
+{
+  // char delim[] = " \t\r\n\f\v";
+  //TODO - implement
+  return -1;
+}
+
 // converts file into an int array. File must be formatted such that each line
 // of the file is a single integer to be input into the array
 int getIntArray(int intArray[], int length, FILE *fp)
