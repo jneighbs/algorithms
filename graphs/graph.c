@@ -18,7 +18,7 @@ Graph* createGraph(FILE *inputFile)
 {
   Graph *g = myMalloc(sizeof(Graph));
   g->numVertices = countLines(inputFile);
-  g->numEdges = countNumWords-(g->numVertices);
+  g->numEdges = countNumWords(inputFile)-(g->numVertices);
   g->vertices = myMalloc(sizeof(Vertex) * g->numVertices);
   g->edges = myMalloc(sizeof(Edge) * g->numEdges);
   hookupGraph(g, inputFile);
