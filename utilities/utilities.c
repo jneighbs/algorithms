@@ -5,6 +5,7 @@
  */
 
 #include <utilities.h>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -72,11 +73,23 @@ int countLines(FILE *fp)
   return count;
 }
 
+// counts the number of words in a file
 int countNumWords(FILE *fp)
 {
-  // char delim[] = " \t\r\n\f\v";
-  //TODO - implement
-  return -1;
+  int maxLen = 1000; // maximum length of a line in the file
+  char line[maxLen]; // will hold one line of the file at a time
+  char delim[] = " \t\r\n\f\v";
+  int numWords = 0;
+  while(fgets(line, maxLen, fp)){
+    if(strtok(line, delim)){
+      numWords++;
+      while(strtok(NULL, delim)){
+        numWords++;
+      }
+    }
+  }
+  printf("numWords: %d\n", numWords);
+  return numWords;
 }
 
 // converts file into an int array. File must be formatted such that each line

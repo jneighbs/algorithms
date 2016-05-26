@@ -12,17 +12,29 @@ Graph* createGraph(FILE *inputFile);
 void hookupGraph(Graph *g, FILE *inputFile);
 void printGraph(Graph *g);
 
-
-
+// Create a graph from an input file. The format for the input file is specified
+// in the graph.h header file
 Graph* createGraph(FILE *inputFile)
 {
   Graph *g = myMalloc(sizeof(Graph));
   g->numVertices = countLines(inputFile);
-  g->numEdges = countNumWords(inputFile)-(g->numVertices);
+  g->numEdges = (countNumWords(inputFile)-(g->numVertices))/2;
+  // init vertices
   g->vertices = myMalloc(sizeof(Vertex) * g->numVertices);
+  for(int i = 0; i < g->numVertices; i++){
+    Vertex *vp = g->vertices+i;
+    vp->label = i+1;
+    vp->head = NULL;
+    vp->tail = NULL;
+  }
+  // init edges
   g->edges = myMalloc(sizeof(Edge) * g->numEdges);
+  for(int i = 0; i < g->numEdges; i++){
+    Edge *ep = g->edges+i;
+    ep->endpoint1 = NULL;
+    ep->endpoint2 = NULL;
+  }
   hookupGraph(g, inputFile);
-  printGraph(g);
   return g;
 }
 

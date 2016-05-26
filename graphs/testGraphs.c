@@ -6,7 +6,7 @@ void readCommandLineArguments(int argc, char *argv[], FILE **inputFile);
 
 int main(int argc, char *argv[])
 {
-  FILE *inputFile;
+  FILE *inputFile = fopen("./input_files/graph_files/input1.txt", "r");
   readCommandLineArguments(argc, argv, &inputFile);
   Graph *g = createGraph(inputFile);
   printGraph(g);
