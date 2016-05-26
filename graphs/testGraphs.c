@@ -1,13 +1,17 @@
+#include <stdio.h>
 #include <graph.h>
-#include <mincut.h>
+
+void readCommandLineArguments(int argc, char *argv[], FILE **inputFile);
+
 
 int main(int argc, char *argv[])
 {
-  // create graph
-  // TODO - read in graph from file
-  int numVertices = 4;
-  int numEdges = 4;
-  Vertex vertices[numVertices];
-  Edge edges[numEdges];
-  Graph g = {numVertices, numEdges, vertices, edges};
+  FILE *inputFile;
+  readCommandLineArguments(argc, argv, &inputFile);
+  Graph *g = createGraph(inputFile);
+}
+
+void readCommandLineArguments(int argc, char *argv[], FILE **inputFile)
+{
+  // char instructions[] = "Usage instructions: \'%s inputFilename\'", argv[0];
 }

@@ -14,5 +14,5 @@ counting: ./counting/testCount.o ./counting/sortAndCountInversions.o ./utilities
 selecting: ./selecting/testSelect.o ./selecting/select.o ./utilities/utilities.o
 	$(CC) -o ./testSelect ./selecting/testSelect.o ./selecting/select.o ./utilities/utilities.o $(CFLAGS)
 
-graphs: ./graphs/testGraphs.o ./graphs/mincut.o ./utilities/utilities.o
-	$(CC) -o ./testGraphs ./graphs/testGraphs.o ./graphs/mincut.o ./utilities/utilities.o $(CFLAGS)
+graphs: ./graphs/testGraphs.o ./graphs/graph.o ./utilities/utilities.o
+	$(CC) -o ./testGraphs ./graphs/testGraphs.o ./graphs/graph.o ./utilities/utilities.o $(CFLAGS)
