@@ -160,6 +160,23 @@ void removeEdge(Graph *g, Edge *ep)
     ep->endpoint2->adjacentEdge = ep;
   }
 }
+
+void removeVertex(Graph *g, Vertex *vp)
+{
+  while(vp->head){
+    removeEdge(g, vp->head->adjacentEdge);
+  }
+  vp->label = 0;
+  int lastVertIndex = --g->numVertices;
+  if(g->vertices+lastVertIndex != vp){
+    swap(vp, g->vertices+lastVertIndex, sizeof(Vertex));
+    ConnectorElement *curElement = vp->head;
+    while(curElement != NULL){
+      curElement->sourceVertex = vp;
+      curElement = curElement->next;
+    }
+  }
+}
 // MANUALLY CREATE A BASIC GRAPH - same as from input1.txt
 //
 // Graph *g = myMalloc(sizeof(Graph));

@@ -39,4 +39,4 @@ typedef struct {
 Graph* createGraph(FILE *fp);
 void printGraph(Graph *g);
 void removeEdge(Graph *g, Edge *e);
-void removeVertex(Graph *g, Edge *e);
+void removeVertex(Graph *g, Vertex *vp);

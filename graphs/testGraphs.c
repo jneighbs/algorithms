@@ -13,12 +13,6 @@ int main(int argc, char *argv[])
   readCommandLineArguments(argc, argv, &inputFile);
   Graph *g = createGraph(inputFile);
   printGraph(g);
-  int i = 0;
-  while(g->vertices[i].head){
-    removeEdge(g, g->vertices[i].head->adjacentEdge);
-  }
-  printGraph(g);
-
 }
 
 void readCommandLineArguments(int argc, char **argv, FILE **inputFile)
