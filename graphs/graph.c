@@ -15,6 +15,10 @@ void hookupGraph(Graph *g, FILE *inputFile);
 void printGraph(Graph *g);
 int getVertexIndex(Graph *g, char *token);
 void connect(Vertex *vp, Edge *ep);
+void removeEndpoint(ConnectorElement *connector);
+void removeEdge(Graph *g, Edge *ep);
+void removeVertex(Graph *g, Vertex *vp);
+
 
 // Create a graph from an input file. The format for the input file is specified
 // in the graph.h header file
@@ -123,6 +127,7 @@ void printGraph(Graph *g)
   }
 }
 
+// removes the connector element
 void removeEndpoint(ConnectorElement *connector)
 {
   // set the edge's pointer to NULL
@@ -146,6 +151,7 @@ void removeEndpoint(ConnectorElement *connector)
   free(connector);
 }
 
+// removes an edge from the graph
 void removeEdge(Graph *g, Edge *ep)
 {
   removeEndpoint(ep->endpoint1);
@@ -161,12 +167,15 @@ void removeEdge(Graph *g, Edge *ep)
   }
 }
 
+// Removes a vertex from the graph (and its edges)
 void removeVertex(Graph *g, Vertex *vp)
 {
+  // while it has edges, remove them
   while(vp->head){
     removeEdge(g, vp->head->adjacentEdge);
   }
   vp->label = 0;
+  // swap vert out to end of array, fix pointers
   int lastVertIndex = --g->numVertices;
   if(g->vertices+lastVertIndex != vp){
     swap(vp, g->vertices+lastVertIndex, sizeof(Vertex));
