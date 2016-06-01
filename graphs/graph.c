@@ -122,6 +122,23 @@ void printGraph(Graph *g)
   }
 }
 
+void removeEndpoint(ConnectorElement *connector)
+{
+
+}
+
+void removeEdge(Graph *g, Edge *ep)
+{
+  removeEndpoint(ep->endpoint1);
+  ep->endpoint1=NULL;
+  removeEndpoint(ep->endpoint2);
+  ep->endpoint2=NULL;
+  // put deleted edge at end of array, decrement numEdges by 1, rehookup
+  // connectors
+  swap(ep, g->edges+(--g->numEdges));
+  ep->endpoint1->adjacentEdge = ep;
+  ep->endpoint2->adjacentEdge = ep;
+}
 // MANUALLY CREATE A BASIC GRAPH - same as from input1.txt
 //
 // Graph *g = myMalloc(sizeof(Graph));

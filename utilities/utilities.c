@@ -107,3 +107,10 @@ int getIntArray(int intArray[], int length, FILE *fp)
   }
   return i;
 }
+
+void swap(void *obj1, void *obj2, size_t size)
+{
+  // char tmp[size];
+  // memcpy(tmp, obj1, size);
+
+}

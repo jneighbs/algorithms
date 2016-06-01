@@ -33,4 +33,7 @@ int countNumWords(FILE *fp);
 // convert file of ints into int[], returns array size
 int getIntArray(int intArray[], int length, FILE *fp);
 
+// generic swap function
+void swap(void *obj1, void *obj2, size_t size);
+
 #endif
