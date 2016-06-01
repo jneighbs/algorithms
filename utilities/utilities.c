@@ -88,7 +88,6 @@ int countNumWords(FILE *fp)
       }
     }
   }
-  printf("numWords: %d\n", numWords);
   return numWords;
 }
 

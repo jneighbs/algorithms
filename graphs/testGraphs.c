@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <graph.h>
 
 void readCommandLineArguments(int argc, char *argv[], FILE **inputFile);
@@ -6,13 +7,22 @@ void readCommandLineArguments(int argc, char *argv[], FILE **inputFile);
 
 int main(int argc, char *argv[])
 {
-  FILE *inputFile = fopen("./input_files/graph_files/input1.txt", "r");
+  FILE *inputFile;
   readCommandLineArguments(argc, argv, &inputFile);
   Graph *g = createGraph(inputFile);
   printGraph(g);
 }
 
-void readCommandLineArguments(int argc, char *argv[], FILE **inputFile)
+void readCommandLineArguments(int argc, char **argv, FILE **inputFile)
 {
-  // char instructions[] = "Usage instructions: \'%s inputFilename\'", argv[0];
+  char instructions[] = "usage: ./testGraphs filename";
+  if(argc != 2){
+    printf("%s\n", instructions);
+    exit(1);
+  }
+  *inputFile = fopen(argv[1], "r");
+  if(inputFile==NULL){
+    printf("File %s failed to open.\n%s\n", argv[1], instructions);
+    exit(1);
+  }
 }
