@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <graph.h>
+#include <utilities.h>
+
 
 void readCommandLineArguments(int argc, char *argv[], FILE **inputFile);
 
@@ -11,6 +13,9 @@ int main(int argc, char *argv[])
   readCommandLineArguments(argc, argv, &inputFile);
   Graph *g = createGraph(inputFile);
   printGraph(g);
+  // TODO: delete edge here
+  printGraph(g);
+
 }
 
 void readCommandLineArguments(int argc, char **argv, FILE **inputFile)

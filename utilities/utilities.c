@@ -108,9 +108,11 @@ int getIntArray(int intArray[], int length, FILE *fp)
   return i;
 }
 
+//generic swapping function
 void swap(void *obj1, void *obj2, size_t size)
 {
-  // char tmp[size];
-  // memcpy(tmp, obj1, size);
-
+  char tmp[size];
+  memcpy(tmp, obj1, size);
+  memcpy(obj1, obj2, size);
+  memcpy(obj2, tmp, size);
 }

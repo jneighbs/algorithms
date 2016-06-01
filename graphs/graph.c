@@ -135,7 +135,7 @@ void removeEdge(Graph *g, Edge *ep)
   ep->endpoint2=NULL;
   // put deleted edge at end of array, decrement numEdges by 1, rehookup
   // connectors
-  swap(ep, g->edges+(--g->numEdges));
+  swap(ep, g->edges+(--g->numEdges), sizeof(Edge));
   ep->endpoint1->adjacentEdge = ep;
   ep->endpoint2->adjacentEdge = ep;
 }
