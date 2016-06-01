@@ -88,6 +88,7 @@ int countNumWords(FILE *fp)
       }
     }
   }
+  rewind(fp);
   return numWords;
 }
 

@@ -5,12 +5,16 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <graph.h>
 #include <utilities.h>
 
 Graph* createGraph(FILE *inputFile);
 void hookupGraph(Graph *g, FILE *inputFile);
 void printGraph(Graph *g);
+int getVertexIndex(Graph *g, char *token);
+void connect(Vertex *vp, Edge *ep);
 
 // Create a graph from an input file. The format for the input file is specified
 // in the graph.h header file
@@ -38,11 +42,65 @@ Graph* createGraph(FILE *inputFile)
   return g;
 }
 
-void hookupGraph(Graph *g, FILE *inputFile)
+// converts string to int and does basic error checking
+int getVertexIndex(Graph *g, char *token)
 {
-  //TODO implement
+  int vertIndex = atoi(token)-1;
+  // check if vertIndex is in range
+  if(vertIndex < 0 || g->numVertices-1 < vertIndex){
+    fprintf(stderr, "Error parsing file: Each token in each line should be an integer in range 1 to numVertices.\n");
+    exit(1);
+  }
+  return vertIndex;
 }
 
+// hook dat shit up yo..ahem, create ConnectorElement and connect it to the
+// given edge and vertex, and vice versa
+void connect(Vertex *vp, Edge *ep)
+{
+  // create connector element
+  ConnectorElement *connector = myMalloc(sizeof(ConnectorElement));
+  // connect to edge
+  connector->adjacentEdge = ep;
+  (ep->endpoint1) ? (ep->endpoint2 = connector) : (ep->endpoint1 = connector);
+  // connect to vertex
+  connector->sourceVertex = vp;
+  // add to head of linked list
+  connector->prev = NULL;
+  connector->next = vp->head;
+  vp->head = connector;
+  if(vp->tail == NULL) vp->tail = connector;
+}
+
+// read through the input file and hook up the graph accordingly
+void hookupGraph(Graph *g, FILE *inputFile)
+{
+  int maxLineLen = 1000;  // maximum length of a line in the file
+  char line[maxLineLen];  // will hold one line of the file at a time
+  char delim[] = " \t\r\n\f\v";
+  char *token;
+  int edgeIndex = 0;
+  while(fgets(line, maxLineLen, inputFile)){
+    // 1st token in line is the source vertex
+    if((token = strtok(line, delim))){
+      int vertIndex1 = getVertexIndex(g, token);
+      Vertex *vert1 = g->vertices+vertIndex1;
+      // loop through and add all edges/ConnectorElements
+      while((token = strtok(NULL, delim))){
+        int vertIndex2 = getVertexIndex(g, token);
+        // if index2 < index1, then we ignore it because we already added it
+        if(vertIndex1 < vertIndex2){
+          Vertex *vert2 = g->vertices+vertIndex2;
+          Edge *ep = g->edges+(edgeIndex++);
+          connect(vert1, ep);
+          connect(vert2, ep);
+        }
+      }
+    }
+  }
+}
+
+// prints the graph
 void printGraph(Graph *g)
 {
   printf("Num Vertices: %d\nNum Edges: %d\n", g->numVertices, g->numEdges);
