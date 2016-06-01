@@ -68,6 +68,7 @@ void connect(Vertex *vp, Edge *ep)
   // add to head of linked list
   connector->prev = NULL;
   connector->next = vp->head;
+  if(connector->next) connector->next->prev = connector;
   vp->head = connector;
   if(vp->tail == NULL) vp->tail = connector;
 }
@@ -124,20 +125,40 @@ void printGraph(Graph *g)
 
 void removeEndpoint(ConnectorElement *connector)
 {
+  // set the edge's pointer to NULL
+  if(connector->adjacentEdge->endpoint1 == connector){
+    connector->adjacentEdge->endpoint1 = NULL;
+  } else {
+    connector->adjacentEdge->endpoint2 = NULL;
+  }
 
+  // remove from linked list
+  if(connector->prev == NULL){
+    connector->sourceVertex->head = connector->next;
+  } else {
+    connector->prev->next = connector->next;
+  }
+  if (connector->next == NULL) {
+    connector->sourceVertex->tail = connector->prev;
+  } else {
+    connector->next->prev = connector->prev;
+  }
+  free(connector);
 }
 
 void removeEdge(Graph *g, Edge *ep)
 {
   removeEndpoint(ep->endpoint1);
-  ep->endpoint1=NULL;
   removeEndpoint(ep->endpoint2);
-  ep->endpoint2=NULL;
   // put deleted edge at end of array, decrement numEdges by 1, rehookup
   // connectors
-  swap(ep, g->edges+(--g->numEdges), sizeof(Edge));
-  ep->endpoint1->adjacentEdge = ep;
-  ep->endpoint2->adjacentEdge = ep;
+  int lastEdgeIndex = --g->numEdges;
+  // if its not the last element, swap it with the last element
+  if(g->edges+lastEdgeIndex != ep){
+    swap(ep, g->edges+lastEdgeIndex, sizeof(Edge));
+    ep->endpoint1->adjacentEdge = ep;
+    ep->endpoint2->adjacentEdge = ep;
+  }
 }
 // MANUALLY CREATE A BASIC GRAPH - same as from input1.txt
 //

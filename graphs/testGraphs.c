@@ -13,7 +13,10 @@ int main(int argc, char *argv[])
   readCommandLineArguments(argc, argv, &inputFile);
   Graph *g = createGraph(inputFile);
   printGraph(g);
-  // TODO: delete edge here
+  int i = 0;
+  while(g->vertices[i].head){
+    removeEdge(g, g->vertices[i].head->adjacentEdge);
+  }
   printGraph(g);
 
 }
