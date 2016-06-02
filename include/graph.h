@@ -38,6 +38,8 @@ typedef struct {
 } Graph;
 
 Graph* createGraph(FILE *fp);
+void freeGraph(Graph *g);
+Graph* copyGraph(Graph *g);
 void printGraph(Graph *g);
 void removeEdge(Graph *g, Edge *e);
 void removeVertex(Graph *g, Vertex *vp);

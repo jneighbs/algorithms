@@ -21,6 +21,9 @@ void removeEdge(Graph *g, Edge *ep);
 void removeVertex(Graph *g, Vertex *vp);
 int kargerMinCut(FILE *inputFile, int numIterations);
 int runKarger(Graph *g);
+void freeGraph(Graph *g);
+Graph* copyGraph(Graph *g);
+
 
 /*
 TODO:
@@ -271,4 +274,32 @@ int runKarger(Graph *g)
     removeVertex(g, v2);
   }
   return g->numEdges;
+}
+
+void freeGraph(Graph *g)
+{
+  free(g->vertices);
+  free(g->edges);
+  free(g->connectors);
+  free(g);
+}
+
+Graph* copyGraph(Graph *g)
+{
+  // allocate space for graph struct and memebers
+  Graph *copyGraph = myMalloc(sizeof(Graph));
+  copyGraph->vertices = myMalloc(sizeof(Vertex) * g->numVertices);
+  copyGraph->edges = myMalloc(sizeof(Edge) * g->numEdges);
+  copyGraph->connectors = myMalloc(sizeof(ConnectorElement) * g->numEdges * 2);
+
+  // copy vertices, edges, connectors
+  memcpy(copyGraph->vertices, g->vertices, sizeof(Vertex) * g->numVertices);
+  memcpy(copyGraph->edges, g->edges, sizeof(Edge) * g->numEdges);
+  memcpy(copyGraph->connectors, g->connectors, sizeof(ConnectorElement) * g->numEdges * 2);
+
+  // init other values
+  copyGraph->numVertices = g->numVertices;
+  copyGraph->numEdges = g->numEdges;
+
+  return copyGraph;
 }
