@@ -15,7 +15,7 @@ Graph* createGraph(FILE *inputFile);
 void hookupGraph(Graph *g, FILE *inputFile);
 void printGraph(Graph *g);
 int getVertexIndex(Graph *g, char *token);
-void connect(Vertex *vp, Edge *ep);
+void connect(Vertex *vp, Edge *ep, ConnectorElement *con);
 void removeEndpoint(ConnectorElement *connector);
 void removeEdge(Graph *g, Edge *ep);
 void removeVertex(Graph *g, Vertex *vp);
@@ -84,23 +84,20 @@ int getVertexIndex(Graph *g, char *token)
   return vertIndex;
 }
 
-// hook dat shit up yo..ahem, create ConnectorElement and connect it to the
-// given edge and vertex, and vice versa
-void connect(Vertex *vp, Edge *ep)
+// hook dat shit up yo..ahem, connect  the ConnectorElement to the given
+// edge and vertex, and vice versa
+void connect(Vertex *vp, Edge *ep, ConnectorElement *con)
 {
-  // create connector element
-  ConnectorElement *connector = myMalloc(sizeof(ConnectorElement));
   // connect to edge
-  connector->adjacentEdge = ep;
-  (ep->endpoint1) ? (ep->endpoint2 = connector) : (ep->endpoint1 = connector);
+  con->adjacentEdge = ep;
+  (ep->endpoint1) ? (ep->endpoint2 = con) : (ep->endpoint1 = con);
   // connect to vertex
-  connector->sourceVertex = vp;
+  con->sourceVertex = vp;
   // add to head of linked list
-  connector->prev = NULL;
-  connector->next = vp->head;
-  if(connector->next) connector->next->prev = connector;
-  vp->head = connector;
-  if(vp->tail == NULL) vp->tail = connector;
+  con->next = vp->head;
+  if(con->next) con->next->prev = con;
+  vp->head = con;
+  if(vp->tail == NULL) vp->tail = con;
 }
 
 // read through the input file and hook up the graph accordingly
@@ -111,6 +108,7 @@ void hookupGraph(Graph *g, FILE *inputFile)
   char delim[] = " \t\r\n\f\v";
   char *token;
   int edgeIndex = 0;
+
   while(fgets(line, maxLineLen, inputFile)){
     // 1st token in line is the source vertex
     if((token = strtok(line, delim))){
@@ -122,9 +120,12 @@ void hookupGraph(Graph *g, FILE *inputFile)
         // if index2 < index1, then we ignore it because we already added it
         if(vertIndex1 < vertIndex2){
           Vertex *vert2 = g->vertices+vertIndex2;
-          Edge *ep = g->edges+(edgeIndex++);
-          connect(vert1, ep);
-          connect(vert2, ep);
+          Edge *ep = g->edges+edgeIndex;
+          ConnectorElement *con = g->connectors+(2*edgeIndex);
+          connect(vert1, ep, con);
+          con = g->connectors+(2*edgeIndex+1);
+          connect(vert2, ep, con);
+          edgeIndex++;
         }
       }
     }
@@ -174,7 +175,12 @@ void removeEndpoint(ConnectorElement *connector)
   } else {
     connector->next->prev = connector->prev;
   }
-  free(connector);
+
+  // set to NULL
+  connector->adjacentEdge=NULL;
+  connector->sourceVertex=NULL;
+  connector->prev=NULL;
+  connector->next=NULL;
 }
 
 // removes an edge from the graph
