@@ -11,8 +11,10 @@ int main(int argc, char *argv[])
 {
   FILE *inputFile;
   readCommandLineArguments(argc, argv, &inputFile);
-  Graph *g = createGraph(inputFile);
-  printGraph(g);
+
+  // printGraph(g);
+  printf("minCut: %d\n", kargerMinCut(inputFile,10000));
+  // printGraph(g);
 }
 
 void readCommandLineArguments(int argc, char **argv, FILE **inputFile)

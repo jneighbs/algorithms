@@ -30,13 +30,15 @@ typedef struct ConnectorElement{
 
 // Graph struct
 typedef struct {
-  int numVertices;      // total num vertices in graph
-  int numEdges;         // total num edges in graph
-  Vertex *vertices;     // address of array of vertices
-  Edge *edges;          // address of array of edges
+  int numVertices;              // total num vertices in graph
+  int numEdges;                 // total num edges in graph
+  Vertex *vertices;             // address of array of vertices
+  Edge *edges;                  // address of array of edges
+  ConnectorElement *connectors; // address of array of ConnectorElements
 } Graph;
 
 Graph* createGraph(FILE *fp);
 void printGraph(Graph *g);
 void removeEdge(Graph *g, Edge *e);
 void removeVertex(Graph *g, Vertex *vp);
+int kargerMinCut(FILE *inputFile, int numIterations);
