@@ -70,8 +70,9 @@ Graph* createGraph(FILE *inputFile)
     connector->prev=NULL;
     connector->next=NULL;
   }
-
   hookupGraph(g, inputFile);
+  rewind(inputFile);
+
   return g;
 }
 
@@ -96,7 +97,7 @@ void connect(Vertex *vp, Edge *ep, ConnectorElement *con)
   (ep->endpoint1) ? (ep->endpoint2 = con) : (ep->endpoint1 = con);
   // connect to vertex
   con->sourceVertex = vp;
-  // add to head of linked list
+  // add to head of linked list (con->prev should already be null)
   con->next = vp->head;
   if(con->next) con->next->prev = con;
   vp->head = con;
@@ -180,10 +181,10 @@ void removeEndpoint(ConnectorElement *connector)
   }
 
   // set to NULL
-  connector->adjacentEdge=NULL;
-  connector->sourceVertex=NULL;
-  connector->prev=NULL;
-  connector->next=NULL;
+  // connector->adjacentEdge=NULL;
+  // connector->sourceVertex=NULL;
+  // connector->prev=NULL;
+  // connector->next=NULL;
 }
 
 // removes an edge from the graph
@@ -224,16 +225,17 @@ void removeVertex(Graph *g, Vertex *vp)
 
 int kargerMinCut(FILE *inputFile, int numIterations)
 {
+  // seed the random number generator
   time_t t;
   srand((unsigned)time(&t));
   Graph *g = createGraph(inputFile);
-  rewind(inputFile);
+
   int bestSolution = g->numEdges;
   for(int i = 0; i < numIterations; i++){
-    g=createGraph(inputFile);
-    rewind(inputFile);
     int newSolution = runKarger(g);
+    free(g);
     if(newSolution < bestSolution) bestSolution = newSolution;
+    g = createGraph(inputFile);
   }
   return bestSolution;
 }
@@ -284,6 +286,7 @@ void freeGraph(Graph *g)
   free(g);
 }
 
+/*
 Graph* copyGraph(Graph *g)
 {
   // allocate space for graph struct and memebers
@@ -303,3 +306,4 @@ Graph* copyGraph(Graph *g)
 
   return copyGraph;
 }
+*/
