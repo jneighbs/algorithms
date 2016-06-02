@@ -6,7 +6,7 @@
 
 
 void readCommandLineArguments(int argc, char *argv[], FILE **inputFile);
-#define NUM_ITERATIONS 1000
+#define NUM_ITERATIONS 2000
 
 int main(int argc, char *argv[])
 {

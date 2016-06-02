@@ -1,5 +1,5 @@
 IDIR=./include
-CFLAGS=-Wall -g -I$(IDIR) #-Ofast
+CFLAGS=-Wall -g -std=c99 -I$(IDIR) #-Ofast
 CC=cc
 
 # TODO: create a 'make clean' rule
