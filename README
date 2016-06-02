@@ -38,14 +38,27 @@ Directory Tree:
 ├── counting
 │   ├── sortAndCountInversions.c
 │   └── testCount.c
+├── graphs
+│   ├── graph.c
+│   └── testGraphs.c
 ├── include
 │   ├── count.h
+│   ├── graph.h
+│   ├── select.h
 │   ├── sort.h
 │   └── utilities.h
 ├── input_files
-│   ├── input.txt
-│   └── large.txt
-├── output_files
+│   ├── graph_files
+│   │   ├── input1.txt
+│   │   ├── input2.txt
+│   │   ├── input3.txt
+│   │   └── kargerMinCut.txt
+│   └── int_array_files
+│       ├── input1.txt
+│       └── input_large1.txt
+├── selecting
+│   ├── select.c
+│   └── testSelect.c
 ├── sorting
 │   ├── sort.c
 │   └── testSort.c
@@ -53,7 +66,7 @@ Directory Tree:
     ├── testUtilities.c
     └── utilities.c
 
-6 directories, 13 files
+9 directories, 23 files
 
 Optimization Options:
   Uncomment the "-Ofast" option in the Makefile (by the CFLAGS variable) to optimize at the highest setting.
