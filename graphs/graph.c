@@ -27,16 +27,9 @@ Graph* copyGraph(Graph *g);
 
 /*
 TODO:
-  1) reorganize connectorElements so that they are initialized in 1 big array
-    of size 2*numEdges. That way they are easy to copy over into another graph
-    (and also easier to free)
-
-  2) write a free(graph) functions
-
-  3)write a copyGraph(g) function
-
-  4) make kargerMinCut take a graph again as an argument instead of a file.
-
+  1)write a copyGraph(g) function (current version copies old pointers over, so
+      it still modifies the original)
+  2) make kargerMinCut take a graph again as an argument instead of a file.
 */
 
 // Create a graph from an input file. The format for the input file is specified

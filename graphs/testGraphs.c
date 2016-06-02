@@ -1,19 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <graph.h>
 #include <utilities.h>
 
 
 void readCommandLineArguments(int argc, char *argv[], FILE **inputFile);
-
+#define NUM_ITERATIONS 1000
 
 int main(int argc, char *argv[])
 {
   FILE *inputFile;
   readCommandLineArguments(argc, argv, &inputFile);
-  // printGraph(g);
-  printf("minCut: %d\n", kargerMinCut(inputFile, 100));
-  // printGraph(g);
+  clock_t start = clock();
+  int minCut = kargerMinCut(inputFile, NUM_ITERATIONS);
+  clock_t diff = clock() - start;
+
+  // print errthing
+  int msec = diff * 1000 / CLOCKS_PER_SEC;
+  printf("minCut: %d\n", minCut);
+  printf("numIterations: %d\n", NUM_ITERATIONS);
+  printf("CPU ticks: %ld\n", diff);
+  printf("Time taken: %d seconds %d milliseconds\n", msec/1000, msec%1000);
 }
 
 void readCommandLineArguments(int argc, char **argv, FILE **inputFile)

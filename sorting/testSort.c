@@ -73,10 +73,10 @@ int main(int argc, char * argv[])
    outputFile);
   sortAndPrint(unsortedArray, numElements, mergeSort, "Merge Sort:     \t",
     outputFile);
-  // sortAndPrint(unsortedArray, numElements, insertionSort, "Insertion Sort: \t",
-  //    outputFile);
-  // sortAndPrint(unsortedArray, numElements, selectionSort, "Selection Sort: \t",
-  //  outputFile);
+  sortAndPrint(unsortedArray, numElements, insertionSort, "Insertion Sort: \t",
+     outputFile);
+  sortAndPrint(unsortedArray, numElements, selectionSort, "Selection Sort: \t",
+   outputFile);
 
 
   fprintf(outputFile, "------------\n");
